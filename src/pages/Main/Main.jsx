@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { NewsBanner } from "../../components/NewsBanner";
 import styles from "./Main.module.scss";
-import { getNews } from "../../api/apiNews";
+
 import { NewsList } from "../../components/NewsList/NewsList";
+import { getNews } from "../../../api/apiNews";
 
 // interface MainProps {}
 
@@ -14,7 +15,6 @@ export const Main = () => {
       try {
         const response = await getNews();
         setNews(response.news);
-        console.log(response.news);
       } catch (error) {
         console.log(error);
       }
