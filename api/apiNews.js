@@ -21,7 +21,11 @@ export const getNews = async ({
         keywords,
       }
     })
-    return response.data
+    if (response.data.status === 'ok') {
+      return response.data
+    } else {
+      throw new Error(`Request failed: ${response.data.status.message || "Unknown error"}`);
+    }
   } catch (error) {
     console.log(error)
   }
@@ -34,7 +38,12 @@ export const getCategories = async () => {
         apiKey: API_KEY,
       }
     })
-    return response.data
+    if (response.data.status === 'ok') {
+      return response.data
+    } else {
+      throw new Error(`Request failed: ${response.data.status.message || "Unknown error"}`);
+    }
+
   } catch (error) {
     console.log(error)
   }
