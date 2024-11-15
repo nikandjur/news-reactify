@@ -24,7 +24,7 @@ export const Pagination = ({
           <button
             key={index}
             className={styles.pageNumber}
-            onClick={() => handleClickPage(index + 1)}
+            onClick={handleClickPage(index + 1)}
             disabled={index + 1 === currentPage}
           >
             {index + 1}

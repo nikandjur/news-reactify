@@ -1,111 +1,90 @@
-import { useEffect, useState } from "react";
-import { NewsBanner } from "../../components/NewsBanner";
-import styles from "./Main.module.scss";
-
-import { NewsList } from "../../components/NewsList/NewsList";
+import { useState } from "react";
 import { getCategories, getNews } from "../../../api/apiNews";
-import { Skeleton } from "../../components/Skeleton/Skeleton";
-import { Pagination } from "../../components/Pagination/Pagination";
 import { Categories } from "../../components/Categories/Categories";
+import { NewsBannerWithSkeleton } from "../../components/NewsBanner";
+import { NewsListWithSkeleton } from "../../components/NewsList/NewsList";
+import { Pagination } from "../../components/Pagination/Pagination";
 import { Search } from "../../components/Search/Search";
+import { PAGE_SIZE, TOTAL_PAGES } from "../../constants/constants";
 import { useDebounce } from "../../helpers/hooks/useDebounce";
+import { useFetch } from "../../helpers/hooks/useFetch";
+import styles from "./Main.module.scss";
+import { useFilters } from "../../helpers/hooks/useFilters";
 
 // interface MainProps {}
 
 export const Main = () => {
-  const [news, setNews] = useState([]);
-  const [keywords, setKeywords] = useState("");
-  const [categories, setCategories] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState("ALL");
-  const [isLoading, setIsLoading] = useState(true);
-  const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = 10;
-  const pageSize = 10;
+  const { filters, changeFilters } = useFilters({
+    page_number: 1,
+    page_size: PAGE_SIZE,
+    category: null,
+    keywords: "",
+  });
+
+  const debouncedKeyword = useDebounce(filters.keywords, 1500);
+
+  const { data: dataCategories } = useFetch(getCategories);
+
+  const { data, isLoading, error } = useFetch(getNews, {
+    ...filters,
+    keywords: debouncedKeyword,
+  });
 
   const handleSetKeyword = (e) => {
     const { value } = e.target;
-    setKeywords(value);
+    changeFilters("keywords", value);
   };
   const handleSelectedCategories = (category) => {
-    setSelectedCategory(category);
-  };
-  const handleNextPage = () => {
-    if (currentPage < totalPages)
-      setCurrentPage((prevCurrenPage) => prevCurrenPage + 1);
-  };
-  const handlePreviousPage = () => {
-    if (currentPage > 1) setCurrentPage((prevCurrenPage) => prevCurrenPage - 1);
-  };
-  const handleClickPage = (pageNumber) => {
-    setCurrentPage(pageNumber);
+    changeFilters("category", category);
   };
 
-  const debouncedKeyword = useDebounce(keywords, 1500);
-
-  const fetchCategories = async () => {
-    try {
-      const response = await getCategories();
-      setCategories(["ALL", ...response.categories]);
-    } catch (error) {
-      console.log(error);
+  const handleNavigation = (params) => () => {
+    if (params === "next" && filters.page_number < TOTAL_PAGES) {
+      changeFilters("page_number", filters.page_number + 1);
+      return;
+    }
+    if (params === "prev" && filters.page_number > 1) {
+      changeFilters("page_number", filters.page_number - 1);
+      return;
+    }
+    if (typeof params === "number" && params >= 1) {
+      changeFilters("page_number", params);
+      return;
     }
   };
-  const fetchNews = async () => {
-    try {
-      setIsLoading(true);
-      const response = await getNews({
-        page_number: currentPage,
-        page_size: pageSize,
-        category: selectedCategory === "ALL" ? null : selectedCategory,
-        keywords: debouncedKeyword,
-      });
-      setNews(response.news);
-      setIsLoading(false);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    fetchNews();
-  }, [currentPage, selectedCategory, debouncedKeyword]);
-
-  useEffect(() => {
-    fetchCategories();
-  }, []);
 
   return (
     <main className={styles.main}>
-      <Categories
-        categories={categories}
-        handleSelectedCategories={handleSelectedCategories}
-        selectedCategory={selectedCategory}
-      />
-      <Search handleSetKeyword={handleSetKeyword} keyword={keywords} />
-      {!isLoading ? (
-        <NewsBanner item={news[0]} />
-      ) : (
-        <Skeleton count={1} type="banner" />
-      )}
-      <Pagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        handleClickPage={handleClickPage}
-        handleNextPage={handleNextPage}
-        handlePreviousPage={handlePreviousPage}
+      {dataCategories.categories ? (
+        <Categories
+          categories={dataCategories.categories}
+          handleSelectedCategories={handleSelectedCategories}
+          selectedCategory={filters.category}
+        />
+      ) : null}
+      <Search handleSetKeyword={handleSetKeyword} keyword={filters.keywords} />
+
+      <NewsBannerWithSkeleton
+        item={data && data.news && data.news[0]}
+        isLoading={isLoading}
       />
 
-      {!isLoading ? (
-        <NewsList news={news} />
-      ) : (
-        <Skeleton count={10} type="item" />
-      )}
       <Pagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        handleClickPage={handleClickPage}
-        handleNextPage={handleNextPage}
-        handlePreviousPage={handlePreviousPage}
+        currentPage={filters.page_number}
+        totalPages={TOTAL_PAGES}
+        handleClickPage={handleNavigation}
+        handleNextPage={handleNavigation("next")}
+        handlePreviousPage={handleNavigation("prev")}
+      />
+
+      <NewsListWithSkeleton news={data?.news} isLoading={isLoading} />
+
+      <Pagination
+        currentPage={filters.page_number}
+        totalPages={TOTAL_PAGES}
+        handleClickPage={handleNavigation}
+        handleNextPage={handleNavigation("next")}
+        handlePreviousPage={handleNavigation("prev")}
       />
     </main>
   );
