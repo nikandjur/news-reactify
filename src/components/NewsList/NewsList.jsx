@@ -11,4 +11,9 @@ const NewsList = ({ news }) => (
     })}
   </ul>
 );
-export const NewsListWithSkeleton = withSkeleton(NewsList, "item", 10);
+export const NewsListWithSkeleton = withSkeleton(
+  NewsList,
+  "item",
+  10,
+  "column"
+);
