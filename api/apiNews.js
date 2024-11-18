@@ -30,6 +30,24 @@ export const getNews = async ({
     console.log(error)
   }
 }
+export const getLatestNews = async () => {
+
+  try {
+    const response = await axios.get(`${BASE_URL}latest-news`, {
+      params: {
+        apiKey: API_KEY,
+      }
+    })
+    if (response.data.status === 'ok') {
+      return response.data
+    } else {
+      throw new Error(`Request failed: ${response.data.status.message || "Unknown error"}`);
+    }
+
+  } catch (error) {
+    console.log(error)
+  }
+}
 export const getCategories = async () => {
 
   try {
