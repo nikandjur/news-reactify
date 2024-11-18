@@ -1,27 +1,29 @@
 .categories {
-  display: flex;
-  width: 100%;
-  gap: 8px;
-  align-items: flex-start;
+  display: flex; /* Устанавливаем flex-контейнер */
+  width: 100%; /* Ограничиваем ширину контейнера */
+  gap: 8px; /* Расстояние между кнопками */
+  align-items: flex-start; /* Выравниваем по верху */
   box-sizing: border-box;
-  overflow-x: auto;
-  white-space: nowrap;
-  scrollbar-width: none;
+  overflow-x: auto; /* Горизонтальная прокрутка */
+  scrollbar-width: none; /* Скрываем стандартный скролл */
 }
+
 .item,
 .active {
-  display: flex;
+  display: inline-flex; /* Включаем inline поведение */
   align-items: center;
   padding: 8px 16px;
-  bottom: none;
+  border: none;
   border-radius: 32px;
-  background-color: antiquewhite;
+  background-color: #f2f4f5;
+  flex-shrink: 0; /* Запрещаем сжатие кнопок */
 }
+
 .active {
-  background-color: aqua;
-  color: #c57fff;
+  background-color: #e7e7ff;
+  color: #6b4eff;
 }
 
 ::-webkit-scrollbar {
-  display: none;
+  display: none; /* Скрываем скролл */
 }
