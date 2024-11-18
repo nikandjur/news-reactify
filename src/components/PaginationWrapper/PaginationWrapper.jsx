@@ -1,5 +1,4 @@
 import { Pagination } from "../Pagination/Pagination";
-import styles from "./PaginationWrapper.module.scss";
 
 // interface PaginationWrapperProps {}
 
