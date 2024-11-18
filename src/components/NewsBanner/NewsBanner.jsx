@@ -1,11 +1,10 @@
 import { formatTimeAgo } from "../../helpers/formatTimeAgo";
-import withSkeleton from "../../helpers/hocs/withSkeleton";
 import { Image } from "../Image";
 import styles from "./NewsBanner.module.scss";
 
 // interface HeaderProps {}
 
-const NewsBanner = ({ item }) => {
+export const NewsBanner = ({ item }) => {
   if (!item) return null;
   return (
     <div className={styles.banner}>
@@ -17,5 +16,3 @@ const NewsBanner = ({ item }) => {
     </div>
   );
 };
-
-export const NewsBannerWithSkeleton = withSkeleton(NewsBanner, "banner", 1);
