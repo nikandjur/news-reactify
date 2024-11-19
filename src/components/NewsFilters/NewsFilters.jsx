@@ -1,7 +1,8 @@
 import { getCategories } from "../../../api/apiNews";
 import { useFetch } from "../../helpers/hooks/useFetch";
-import { Categories } from "../Categories/Categories";
+import Categories from "../Categories/Categories";
 import { Search } from "../Search/Search";
+import { Slider } from "../Slider/Slider";
 import styles from "./NewsFilters.module.scss";
 
 // interface NewsFiltersProps {}
@@ -19,11 +20,13 @@ export const NewsFilters = ({ filters, changeFilters }) => {
   return (
     <div className={styles.filters}>
       {dataCategories.categories ? (
-        <Categories
-          categories={dataCategories.categories}
-          handleSelectedCategories={handleSelectedCategories}
-          selectedCategory={filters.category}
-        />
+        <Slider>
+          <Categories
+            categories={dataCategories.categories}
+            handleSelectedCategories={handleSelectedCategories}
+            selectedCategory={filters.category}
+          />
+        </Slider>
       ) : null}
       <Search handleSetKeyword={handleSetKeyword} keyword={filters.keywords} />
     </div>
