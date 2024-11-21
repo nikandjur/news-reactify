@@ -1,13 +1,10 @@
 import { themeIcons } from "../../assets";
+import { useTheme } from "../../context/ThemeContext";
 import { formatDate } from "../../helpers/formatDate";
 import styles from "./Header.module.scss";
 
-interface Props {
-  isDark: boolean;
-  setIsDark: () => void;
-}
-
-export const Header = ({ isDark, setIsDark }: Props) => {
+export const Header = () => {
+  const { isDark, toggleTheme } = useTheme();
   return (
     <header
       className={`${styles.header} ${isDark ? styles.dark : styles.light}`}
@@ -21,7 +18,7 @@ export const Header = ({ isDark, setIsDark }: Props) => {
         src={isDark ? themeIcons.light : themeIcons.dark}
         width={30}
         alt="theme"
-        onClick={setIsDark}
+        onClick={toggleTheme}
       />
     </header>
   );

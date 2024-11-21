@@ -11,11 +11,7 @@ import styles from "./NewsByFilters.module.scss";
 
 type Navigation = number | "next" | "prev";
 
-interface Props {
-  isDark: boolean;
-}
-
-export const NewsByFilters = ({ isDark }: Props) => {
+export const NewsByFilters = () => {
   const { filters, changeFilters } = useFilters({
     page_number: 1,
     page_size: PAGE_SIZE,
@@ -50,11 +46,7 @@ export const NewsByFilters = ({ isDark }: Props) => {
 
   return (
     <section className={styles.section}>
-      <NewsFilters
-        isDark={isDark}
-        filters={filters}
-        changeFilters={changeFilters}
-      />
+      <NewsFilters filters={filters} changeFilters={changeFilters} />
 
       <PaginationWrapper
         top
@@ -64,7 +56,6 @@ export const NewsByFilters = ({ isDark }: Props) => {
         handleClickPage={handleNavigation}
         handleNextPage={handleNavigation}
         handlePreviousPage={handleNavigation}
-        isDark={isDark}
       >
         <NewsListWithSkeleton news={data?.news} isLoading={isLoading} />
       </PaginationWrapper>
