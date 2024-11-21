@@ -9,8 +9,11 @@ export const Pagination = ({
   handleClickPage,
   handleNextPage,
   handlePreviousPage,
+  isDark,
 }: IPaginationProps) => (
-  <div className={styles.pagination}>
+  <div
+    className={`${styles.pagination} ${isDark ? styles.dark : styles.light}`}
+  >
     <button
       onClick={() => handlePreviousPage("prev")}
       className={styles.arrow}
