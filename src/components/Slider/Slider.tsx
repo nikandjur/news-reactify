@@ -1,14 +1,15 @@
 import React, { useRef } from "react";
+import { useTheme } from "../../context/ThemeContext";
 import styles from "./Slider.module.scss";
 
 interface Props {
   children: React.ReactElement;
   step?: number;
-  isDark: boolean;
 }
 
-export const Slider = ({ children, step = 150, isDark }: Props) => {
+export const Slider = ({ children, step = 150 }: Props) => {
   const sliderRef = useRef<HTMLElement | null>(null);
+  const { isDark } = useTheme();
 
   const scrollLeft = () => {
     if (!sliderRef.current) return;

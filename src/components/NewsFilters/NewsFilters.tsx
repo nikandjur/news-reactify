@@ -9,10 +9,9 @@ import styles from "./NewsFilters.module.scss";
 interface Props {
   filters: IFilters;
   changeFilters: (key: string, value: number | string | null) => void;
-  isDark: boolean;
 }
 
-export const NewsFilters = ({ filters, changeFilters, isDark }: Props) => {
+export const NewsFilters = ({ filters, changeFilters }: Props) => {
   const { data: dataCategories } = useFetch<CategoriesApiResponse, null>(
     getCategories
   );
@@ -27,7 +26,7 @@ export const NewsFilters = ({ filters, changeFilters, isDark }: Props) => {
   return (
     <div className={styles.filters}>
       {dataCategories?.categories ? (
-        <Slider isDark={isDark}>
+        <Slider>
           <Categories
             categories={dataCategories.categories}
             handleSelectedCategories={handleSelectedCategories}
@@ -35,11 +34,7 @@ export const NewsFilters = ({ filters, changeFilters, isDark }: Props) => {
           />
         </Slider>
       ) : null}
-      <Search
-        isDark={isDark}
-        handleSetKeyword={handleSetKeyword}
-        keyword={filters.keywords}
-      />
+      <Search handleSetKeyword={handleSetKeyword} keyword={filters.keywords} />
     </div>
   );
 };
