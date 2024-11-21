@@ -2,13 +2,15 @@ import { LatestNews } from "../../components/LatestNews/LatestNews";
 import { NewsByFilters } from "../../components/NewsByFilters/NewsByFilters";
 import styles from "./Main.module.scss";
 
-// interface MainProps {}
+interface Props {
+  isDark: boolean;
+}
 
-export const Main = () => {
+export const Main = ({ isDark }: Props) => {
   return (
     <main className={styles.main}>
       <LatestNews />
-      <NewsByFilters />
+      <NewsByFilters isDark={isDark} />
     </main>
   );
 };
