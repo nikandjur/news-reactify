@@ -31,7 +31,6 @@ export interface IPaginationProps {
   handleNextPage: (page: "next") => void;
   handleClickPage: (page: number) => void;
   currentPage: number;
-  isDark: boolean;
 }
 
 export interface IFilters {
