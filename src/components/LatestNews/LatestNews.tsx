@@ -1,12 +1,11 @@
 import { getLatestNews } from "../../../api/apiNews";
 import { useFetch } from "../../helpers/hooks/useFetch";
+import { NewsApiResponse } from "../../interfaces";
 import { BannersListWithSkeleton } from "../BannersList/BannersList";
 import styles from "./LatestNews.module.scss";
 
-// interface LatestNewsProps {}
-
 export const LatestNews = () => {
-  const { data, isLoading, error } = useFetch(getLatestNews);
+  const { data, isLoading } = useFetch<NewsApiResponse, null>(getLatestNews);
   return (
     <section className={styles.section}>
       <BannersListWithSkeleton

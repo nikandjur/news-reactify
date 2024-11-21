@@ -1,12 +1,17 @@
+import { DirectionType, SkeletonType } from "../../interfaces";
 import styles from "./Skeleton.module.scss";
 
-// interface SkeletonProps {}
+interface Props {
+  type?: SkeletonType;
+  count?: number;
+  direction?: DirectionType;
+}
 
 export const Skeleton = ({
   count = 1,
   type = "banner",
   direction = "column",
-}) => {
+}: Props) => {
   const items = [...Array(count)];
   // const items = [...Array(count).key()];
 
