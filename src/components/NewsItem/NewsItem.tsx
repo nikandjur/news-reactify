@@ -1,9 +1,12 @@
 import { formatTimeAgo } from "../../helpers/formatTimeAgo";
+import { INews } from "../../interfaces";
 import styles from "./NewsItem.module.scss";
 
-// interface NewsItemProps {}
+interface Props {
+  item: INews;
+}
 
-export const NewsItem = ({ item }) => (
+export const NewsItem = ({ item }: Props) => (
   <li className={styles.newsItem}>
     <div
       className={styles.wrapper}

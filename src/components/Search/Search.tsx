@@ -1,8 +1,11 @@
 import styles from "./Search.module.scss";
 
-// interface SearchProps {}
+interface Props {
+  keyword: string;
+  handleSetKeyword: React.ChangeEventHandler<HTMLInputElement> | undefined;
+}
 
-export const Search = ({ keyword, handleSetKeyword }) => (
+export const Search = ({ keyword, handleSetKeyword }: Props) => (
   <div className={styles.search}>
     <input
       className={styles.input}

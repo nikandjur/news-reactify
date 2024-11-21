@@ -1,10 +1,13 @@
 import { formatTimeAgo } from "../../helpers/formatTimeAgo";
+import { INews } from "../../interfaces";
 import { Image } from "../Image";
 import styles from "./NewsBanner.module.scss";
 
-// interface HeaderProps {}
+interface Props {
+  item: INews;
+}
 
-export const NewsBanner = ({ item }) => {
+export const NewsBanner = ({ item }: Props) => {
   if (!item) return null;
   return (
     <div className={styles.banner}>
