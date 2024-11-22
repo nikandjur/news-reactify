@@ -1,4 +1,4 @@
-import { NewsApiResponse, INews } from "@/shared/interfaces";
+import { INews, NewsApiResponse } from "./model/types";
 import { NewsBanner } from "./ui/NewsBanner/NewsBanner";
 import { NewsItem } from "./ui/NewsItem/NewsItem";
 
