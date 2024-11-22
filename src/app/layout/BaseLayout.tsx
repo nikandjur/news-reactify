@@ -1,5 +1,5 @@
 import { useTheme } from "@/app/providers/ThemeProvider";
-import { Main } from "@/pages/main";
+import { MainPage } from "@/pages/main";
 import { Header } from "@/widgets/header";
 
 function BaseLayout() {
@@ -8,7 +8,7 @@ function BaseLayout() {
     <div className={`app ${isDark ? "dark" : "light"}`}>
       <Header />
       <div className="container">
-        <Main />
+        <MainPage />
       </div>
     </div>
   );

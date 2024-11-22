@@ -29,5 +29,5 @@
       "@/*": ["src/*"]
     }
   },
-  "include": ["src", "/shared/interfaces/vite-env.d.ts"]
+  "include": ["src", "shared/interfaces/vite-env.d.ts"]
 }
