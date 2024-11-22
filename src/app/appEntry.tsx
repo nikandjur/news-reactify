@@ -7,7 +7,8 @@ import { Provider } from "react-redux";
 import { ThemeProvider } from "@/app/providers/ThemeProvider";
 
 import { store } from "./appStore";
-import { BaseLayout } from "./layout/BaseLayout";
+import BaseLayout from "./layout/BaseLayout";
+
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
