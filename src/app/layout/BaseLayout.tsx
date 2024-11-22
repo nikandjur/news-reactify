@@ -1,5 +1,5 @@
 import { useTheme } from "@/app/providers/ThemeProvider";
-import { Main } from "@/pages/main/ui/Page";
+import { Main } from "@/pages/main";
 import { Header } from "@/widgets/header";
 
 function BaseLayout() {
