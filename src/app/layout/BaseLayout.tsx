@@ -4,9 +4,6 @@ import { Header } from "@/widgets/header";
 
 function BaseLayout() {
   const { isDark } = useTheme();
-
-  console.log("Импортируемый путь:", "@/pages/main/ui/MainPage");
-
   return (
     <div className={`app ${isDark ? "dark" : "light"}`}>
       <Header />
