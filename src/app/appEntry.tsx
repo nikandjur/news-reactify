@@ -5,8 +5,9 @@ import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
 
 import { ThemeProvider } from "@/app/providers/ThemeProvider";
-import BaseLayout from "./layout/BaseLayout";
+
 import { store } from "./appStore";
+import { BaseLayout } from "./layout/BaseLayout";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

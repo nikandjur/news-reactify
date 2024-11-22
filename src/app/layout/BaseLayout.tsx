@@ -14,4 +14,4 @@ function BaseLayout() {
   );
 }
 
-export default BaseLayout;
+export { BaseLayout };
