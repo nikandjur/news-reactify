@@ -21,8 +21,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
-
-    // ... your other compiler options
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
