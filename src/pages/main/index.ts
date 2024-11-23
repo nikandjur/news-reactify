@@ -4,3 +4,4 @@ import { LatestNews } from "./ui/LatestNews/LatestNews";
 import { NewsFilters } from "./ui/NewsFilters/NewsFilters";
 
 export { LatestNews, NewsFilters, NewsByFilters, MainPage };
+//new commit
