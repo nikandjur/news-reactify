@@ -1,4 +1,4 @@
-import BannersList from "./BannersList/BannersList";
-import NewsList from "./NewsList/NewsList";
+import { NewsFilters } from "./NewsFilters/NewsFilters";
+import ListWithSkeleton from "./NewsList/NewsList";
 
-export { BannersList, NewsList };
+export { ListWithSkeleton, NewsFilters };

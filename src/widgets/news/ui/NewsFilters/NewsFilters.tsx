@@ -1,18 +1,18 @@
-import { IFilters } from "@/shared/interfaces";
-import styles from "./NewsFilters.module.scss";
 import { useAppDispatch } from "@/app/appStore";
-import Categories from "@/features/category/ui/Categories/Categories";
+import { CategoriesType } from "@/entities/category";
 import { setFilters } from "@/entities/news/model/newsSlice";
+import Categories from "@/features/category/ui/Categories/Categories";
 import { Search } from "@/features/search";
 import { Slider } from "@/features/slider";
-import { useGetCategoriesQuery } from "@/entities/category/api/categoriesApi";
+import { IFilters } from "@/shared/interfaces";
+import styles from "./NewsFilters.module.scss";
 
 interface Props {
   filters: IFilters;
+  categories: CategoriesType[];
 }
 
-export const NewsFilters = ({ filters }: Props) => {
-  const { data } = useGetCategoriesQuery(null);
+export const NewsFilters = ({ filters, categories }: Props) => {
   const dispatch = useAppDispatch();
 
   const handleSetKeyword: React.ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -25,10 +25,10 @@ export const NewsFilters = ({ filters }: Props) => {
 
   return (
     <div className={styles.filters}>
-      {data?.categories ? (
+      {categories ? (
         <Slider>
           <Categories
-            categories={data.categories}
+            categories={categories}
             handleSelectedCategories={handleSelectedCategories}
             selectedCategory={filters.category}
           />

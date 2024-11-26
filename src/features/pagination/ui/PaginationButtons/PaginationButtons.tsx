@@ -21,7 +21,6 @@ export const PaginationButtons = ({
       >
         {"<"}
       </button>
-
       <div className={styles.list}>
         {[...Array(totalPages)].map((_, index) => {
           return (
@@ -36,7 +35,6 @@ export const PaginationButtons = ({
           );
         })}
       </div>
-
       <button
         onClick={() => handleNextPage("next")}
         className={styles.arrow}
